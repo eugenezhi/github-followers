@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/search', [App\Http\Controllers\HomeController::class, 'searchByUsername'])->name('search');
+Route::post('/get_followers', [App\Http\Controllers\HomeController::class, 'getFollowers'])->name('load_more');
