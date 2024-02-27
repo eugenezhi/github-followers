@@ -73,9 +73,8 @@ export default {
                 this.user = response.data;
                 this.loadFollowers(this.user.followers_url);
             }).catch(error => {
-                this.userNotFound = true;
-            }).finally(function () {
                 this.loading = false;
+                this.userNotFound = true;
             });
         },
         async loadFollowers(url) {
