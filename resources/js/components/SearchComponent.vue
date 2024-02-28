@@ -6,15 +6,17 @@
                     <div class="card-body">
 
                         <div class="input-group mb-3">
-                            <input name="username" type="search" v-model="username" v-on:keyup.enter="search" class="form-control" placeholder="Enter GitHub username" aria-label="Enter GitHub username" aria-describedby="basic-addon2" required autofocus>
+                            <input name="username" type="search" v-model="username" @input="userNotFound = false" v-on:keyup.enter="search" class="form-control" placeholder="Enter GitHub username" aria-label="Enter GitHub username" aria-describedby="basic-addon2" required autofocus>
                             <div class="input-group-append">
-                                <button @click="search" class="btn btn-outline-secondary">Search</button>
+                                <button @click="search" class="btn btn-outline-secondary">
+                                    <span class="spinner-border spinner-border-sm" role="status" v-if="loading"></span>
+                                    <span v-else>
+                                        Search
+                                    </span>
+                                </button>
                             </div>
                         </div>
 
-                        <div class="spinner-border" role="status" v-if="loading">
-                            <span class="sr-only"></span>
-                        </div>
                         <h4 v-if="userNotFound">User with username "{{ username }}" not found</h4>
 
                         <div v-if="Object.keys(user).length">
@@ -27,7 +29,12 @@
                                 </div>
                             </div>
 
-                            <button @click="loadFollowers(followers.load_more_url)" v-if="followers.load_more_url" class="w-100 btn btn-primary btn-lg" type="submit">Load more</button>
+                            <button @click="loadFollowers(followers.load_more_url)" v-if="followers.load_more_url" class="w-100 btn btn-primary btn-lg" type="submit">
+                                <span class="spinner-border spinner-border-sm" role="status" v-if="loadingFollowers"></span>
+                                <span v-else>
+                                    Load more
+                                </span>
+                            </button>
                         </div>
 
                     </div>
@@ -51,6 +58,7 @@ export default {
             },
             username: '',
             loading: false,
+            loadingFollowers: false,
             userNotFound: false,
         }
     },
@@ -73,11 +81,12 @@ export default {
                 this.user = response.data;
                 this.loadFollowers(this.user.followers_url);
             }).catch(error => {
-                this.loading = false;
                 this.userNotFound = true;
+                this.loading = false;
             });
         },
         async loadFollowers(url) {
+            this.loadingFollowers = true;
             await axios.post('/api/get_followers', {
                 url: url
             }).then((response) => {
@@ -86,6 +95,7 @@ export default {
             }).catch(error => {
                 //console.log(error.toString())
             });
+            this.loadingFollowers = false;
         }
     }
 }
