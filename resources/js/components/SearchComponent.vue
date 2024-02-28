@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-axios.defaults.headers.common['_token'] = window.csrfToken;
 
 export default {
     data() {
