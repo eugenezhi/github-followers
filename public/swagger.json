@@ -1,0 +1,173 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "GitHub Followers API",
+        "version": "1.0.0",
+        "title": "GitHub Followers API"
+    },
+    "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "tags": [
+        {
+            "name": "GitHub User",
+            "description": "Search for GitHub user name and followers"
+        }
+    ],
+    "paths": {
+        "/search": {
+            "get": {
+                "tags": [
+                    "GitHub User"
+                ],
+                "summary": "Find a GitHub user by username",
+                "description": "Returns user data",
+                "operationId": "userProfile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "username",
+                        "type": "string",
+                        "required": true,
+                        "description": "GitHub username"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/get_followers": {
+            "post": {
+                "tags": [
+                    "GitHub User"
+                ],
+                "summary": "Get a GitHub user follower avatars by url",
+                "description": "Returns follower avatars (max 30) & url to load more",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "required": [
+                                    "url"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "url": "https://api.github.com/users/taylorotwell/followers"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/Followers"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "required": [
+                "name",
+                "followers",
+                "followers_url"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Taylor Otwell"
+                },
+                "followers": {
+                    "type": "integer",
+                    "example": 30757
+                },
+                "followers_url": {
+                    "type": "string",
+                    "example": "https://api.github.com/users/taylorotwell/followers"
+                }
+            }
+        },
+        "Followers": {
+            "type": "object",
+            "required": [
+                "avatar"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "array",
+                    "example": [
+                        "https://avatars.githubusercontent.com/u/435?v=4",
+                        "https://avatars.githubusercontent.com/u/1060?v=4",
+                        "https://avatars.githubusercontent.com/u/1887?v=4",
+                        "https://avatars.githubusercontent.com/u/2198?v=4",
+                        "https://avatars.githubusercontent.com/u/3295?v=4",
+                        "https://avatars.githubusercontent.com/u/3603?v=4",
+                        "https://avatars.githubusercontent.com/u/3856?v=4",
+                        "https://avatars.githubusercontent.com/u/4401?v=4",
+                        "https://avatars.githubusercontent.com/u/4928?v=4",
+                        "https://avatars.githubusercontent.com/u/4959?v=4",
+                        "https://avatars.githubusercontent.com/u/5255?v=4",
+                        "https://avatars.githubusercontent.com/u/5867?v=4",
+                        "https://avatars.githubusercontent.com/u/5961?v=4",
+                        "https://avatars.githubusercontent.com/u/6124?v=4",
+                        "https://avatars.githubusercontent.com/u/6490?v=4",
+                        "https://avatars.githubusercontent.com/u/6953?v=4",
+                        "https://avatars.githubusercontent.com/u/7060?v=4",
+                        "https://avatars.githubusercontent.com/u/7697?v=4",
+                        "https://avatars.githubusercontent.com/u/7740?v=4",
+                        "https://avatars.githubusercontent.com/u/8958?v=4",
+                        "https://avatars.githubusercontent.com/u/9103?v=4",
+                        "https://avatars.githubusercontent.com/u/9691?v=4",
+                        "https://avatars.githubusercontent.com/u/10059?v=4",
+                        "https://avatars.githubusercontent.com/u/10412?v=4",
+                        "https://avatars.githubusercontent.com/u/10508?v=4",
+                        "https://avatars.githubusercontent.com/u/12161?v=4",
+                        "https://avatars.githubusercontent.com/u/12304?v=4",
+                        "https://avatars.githubusercontent.com/u/12743?v=4",
+                        "https://avatars.githubusercontent.com/u/12885?v=4",
+                        "https://avatars.githubusercontent.com/u/14335?v=4"
+                    ]
+                },
+                "load_more_url": {
+                    "type": "string",
+                    "example": "https://api.github.com/user/463230/followers?page=2"
+                }
+            }
+        }
+    }
+}
