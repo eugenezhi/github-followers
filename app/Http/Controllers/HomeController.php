@@ -13,6 +13,9 @@ use Illuminate\Validation\ValidationException;
  */
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     */
     public function __construct(
         protected GitHubService $service
     ) {}
