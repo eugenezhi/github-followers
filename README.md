@@ -3,7 +3,9 @@
 A page with a form for searching user data and followers by GitHub username. 
 The user's GitHub username, number of subscribers, and avatar of the user's subscribers are displayed for the user found.
 
-Because some users (e.g. taylorotwell, etc.) have many thousands of subscribers, GitHub only returns a portion of the subscribers on each request. Added a “Load More” button, which when clicked receives the next portion of subscribers. This button persists until there are no more subscriber pages to receive.
+Because some users (e.g. taylorotwell, etc.) have many thousands of subscribers, GitHub only returns a portion of the subscribers on each request.
+Added a “Load more” button, when clicked it receives another portion of followers. 
+This button persists until there are no more subscriber pages to receive.
 
 Information on the GitHub API is available [here](https://docs.github.com/en/rest?apiVersion=2022-11-28).
 
@@ -19,7 +21,7 @@ Automatic documentation can be created using the phpDocumentor tool: https://php
 
 
 ### Installation
-- Clone the repo
+- Clone the repository
 - Run ```composer install```
 - Run ```php -r "file_exists('.env') || copy('.env.example', '.env');"```
 - Set your [GitHub token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) as the configuration value ```GITHUB_ACCESS_TOKEN``` in the ```.env``` file
