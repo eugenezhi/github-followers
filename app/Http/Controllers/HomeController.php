@@ -8,19 +8,18 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
+/*
+ * Controller to retrieve data from GitHub API
+ */
 class HomeController extends Controller
 {
-    protected GitHubService $service;
+    public function __construct(
+        protected GitHubService $service
+    ) {}
 
     /**
-     * @return void
-     */
-    public function __construct(GitHubService $service)
-    {
-        $this->service = $service;
-    }
-
-    /**
+     * Render home page with search form
+     *
      * @return Renderable
      */
     public function index(): Renderable
@@ -29,6 +28,8 @@ class HomeController extends Controller
     }
 
     /**
+     * Retrieve user data by GitHub username
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
@@ -52,6 +53,8 @@ class HomeController extends Controller
     }
 
     /**
+     * Get subscribers' avatar data from the url returned by GitHub
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException

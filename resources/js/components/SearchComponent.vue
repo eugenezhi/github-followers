@@ -61,6 +61,7 @@ export default {
         }
     },
     methods: {
+        // Retrieve user data by GitHub username
         async search() {
             this.loading = true;
             this.userNotFound = false;
@@ -83,6 +84,7 @@ export default {
                 this.loading = false;
             });
         },
+        // Get subscribers' avatar data from the url returned by GitHub
         async loadFollowers(url) {
             this.loadingFollowers = true;
             await axios.post('/api/get_followers', {
