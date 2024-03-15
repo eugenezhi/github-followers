@@ -7,8 +7,10 @@ Because some users (e.g. taylorotwell, etc.) have many thousands of subscribers,
 
 Information on the GitHub API is available [here](https://docs.github.com/en/rest?apiVersion=2022-11-28).
 
-[Live demo](http://178.128.150.192)  
-    - [Swagger UI API](http://178.128.150.192/swagger/)
+[Live demo](http://github.free.nf)  
+    - [Swagger UI API](http://github.free.nf/swagger/)
+
+Automatic documentation can be created using the phpDocumentor tool: https://phpdoc.org/.
 
 ### Technologies used
 - PHP ([Laravel](https://github.com/laravel/laravel))
